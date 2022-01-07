@@ -10,7 +10,7 @@ public class Data
     private string _id;
 
     [SerializeField]
-    public Sprite _sprite;
+    private Sprite _sprite;
 
     public string Id => _id;
 
