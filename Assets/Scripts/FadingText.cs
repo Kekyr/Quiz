@@ -8,6 +8,7 @@ public class FadingText : MonoBehaviour
 {
     private TextMeshProUGUI _textMeshPro;
     private Tween fadeTween;
+    
     void Start()
     {
         _textMeshPro = GetComponent<TextMeshProUGUI>();

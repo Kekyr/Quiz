@@ -10,19 +10,22 @@ using Random = UnityEngine.Random;
 
 public class CellsController : MonoBehaviour
 { 
-     [SerializeField] private MassOfPackOfData[] _massOfPackOfData;
-     [SerializeField] private TextMeshProUGUI _textMeshPro;
-     [SerializeField] private GameObject _restartButton;
-     [SerializeField] private FadingScreen _fadingScreen;
-
+    [SerializeField] private MassOfPackOfData[] _massOfPackOfData;
+    [SerializeField] private TextMeshProUGUI _textMeshPro;
+    [SerializeField] private GameObject _restartButton;
+    [SerializeField] private FadingScreen _fadingScreen;
     private CellSpawner _spawner;
     private Cell _cell;
     private List<Cell> _activeCells=new List<Cell>();
+    
     private Vector2 _position = new Vector2(-3, 3);
+    private Vector2 _startPosition= new Vector2(-3, 3);
     private float _elementToFindIndex;
     private float _newLine;
     private int _currentMassOfPackOfData;
     private int _currentPackOfData;
+    private int _startXPosition=-3;
+    private int _intervalYPosition=3;
     private bool _interactable=true;
 
 
@@ -110,15 +113,13 @@ public class CellsController : MonoBehaviour
                 }
             }
 
-            _position = new Vector2(-3, 3);
+            _position = _startPosition;
 
             _currentMassOfPackOfData++;
         }
         else
         {
-            _interactable = false;
-            _restartButton.SetActive(true);
-            _fadingScreen.FadeOut();
+            FadingOut();
         }
     }
 
@@ -145,8 +146,15 @@ public class CellsController : MonoBehaviour
 
     private void ChangePositionForNewLine()
     {
-        _position.y -= 3;
-        _position.x = -3;
+        _position.y -= _intervalYPosition;
+        _position.x = _startXPosition;
+    }
+
+    private void FadingOut()
+    {
+        _interactable = false;
+        _restartButton.SetActive(true);
+        _fadingScreen.FadeOut();
     }
     
 }
